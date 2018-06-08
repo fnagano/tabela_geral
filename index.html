@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple tables in D3</title>
+    <meta charset="utf-8">
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src='jetpack-starter-kit.js'></script>
+    <style type="text/css">
+    body { font-family: 'Helvetica Neue', Helvetica; font-weight: 300; padding: 20px;}
+    th { text-align: left; }
+    th, td { padding: 0 2em 1.5ex 0;}
+    th.center, td.center { text-align: center; }
+    th.num, td.num { text-align: right; }
+    </style>
+</head>
+<body>
+    <script>
+
+
+
+    d3.json("knockout_data2.json", function(data)
+
+        {
+        	console.log(data);
+            // column definitions OK!
+            var headers = [
+                { head: '', cl: 'center', html: ƒ('flag')},
+                { head: 'Time', cl: 'center', html: ƒ('team')},
+                { head: 'Grupo', cl: 'center', html: ƒ('group')},
+                { head: 'Oitavas', cl: 'num', html: ƒ('eight', percent())},
+                { head: 'Quartas', cl: 'num', html: ƒ('quarter', percent())},
+                { head: 'Semi', cl: 'num', html: ƒ('semi', percent())},
+                { head: 'Final', cl: 'num', html: ƒ('final', percent())},
+                { head: 'Campeão', cl: 'num', html: ƒ('winner', percent())}
+            ];
+
+            var keys = [
+                { head: 'flag', cl: 'center', html: ƒ('flagA')},
+                { head: 'team', cl: 'center', html: ƒ('team')},
+                { head: 'group', cl: 'center', html: ƒ('group')},
+                { head: 'eight', cl: 'num', html: ƒ('eight', percent())},
+                { head: 'quarter', cl: 'num', html: ƒ('quarter', percent())},
+                { head: 'semi', cl: 'num', html: ƒ('semi', percent())},
+                { head: 'final', cl: 'num', html: ƒ('final', percent())},
+                { head: 'winner', cl: 'num', html: ƒ('winner', percent())}
+            ];
+
+            // Criando tabela
+            var table = d3.select('body')
+                .append('table');
+
+            // Criando cabecalho
+            table.append('thead').append('tr')
+                .selectAll('th')
+                .data(headers).enter()
+                .append('th')
+                .attr('class', ƒ('cl'))
+                .text(ƒ('head'));
+
+            // Corpo da tabela
+            table.append('tbody')
+            .selectAll('tr')
+            .data(data).enter()
+            .append('tr')
+            .selectAll('td')
+            //.data(test[2].flagA).enter()
+            .data(function(row,i) {
+                return row.flag
+            }).enter()
+            .append('td')
+            .append('img')
+            .attr('src', function(d) {
+                return d.src;
+            })
+            .data(function(row, i) {
+                return keys.map(function(c) {
+                    // compute cell values for this specific row
+                    var cell = {};
+                    d3.keys(c).forEach(function(k) {
+                        cell[k] = typeof c[k] == 'function' ? c[k](row,i) : c[k];
+                    });
+                    return cell;
+                });
+            }).enter()
+            .append('td')
+            .html(ƒ('html'))
+            .attr('class', ƒ('cl'));
+
+        // Cover percentage
+        function percent() {
+            return function(f) { return Math.floor(100 * f) % 100 + '%'; };
+        }
+
+        })
+    </script>
+</body>
+</html>
