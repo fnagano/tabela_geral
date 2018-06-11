@@ -100,7 +100,7 @@
                 .append('table');
        
             // Criando cabecalho
-            table.append('thead').append('tr')
+            var headers = table.append('thead').append('tr')
                 .selectAll('th')
                 .data(headers).enter()
                 .append('th')
