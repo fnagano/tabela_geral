@@ -15,10 +15,10 @@
     th, td {
     border-bottom: 1px solid #ddd;
 }
-    th {
-    background-color: #004481;
-    color: white;
-}   
+//    th {
+//    background-color: #004481;
+//    color: white;
+//}   
 	    
     table th:nth-child(1){
        width: 30px;
@@ -93,19 +93,7 @@
                 .append('th')
                 .attr('class', ƒ('cl'))
                 .text(ƒ('head'))
-       		                   .on('click', function (d) {
-		                	   headers.attr('class', 'header');
-		                	   
-		                	   if (sortAscending) {
-		                	     rows.sort(function(a, b) { return b[d] < a[d]; });
-		                	     sortAscending = false;
-		                	     this.className = 'aes';
-		                	   } else {
-		                		 rows.sort(function(a, b) { return b[d] > a[d]; });
-		                		 sortAscending = true;
-		                		 this.className = 'des';
-		                	   } 
-        });
+    
 
             // Corpo da tabela
             table.append('tbody')
