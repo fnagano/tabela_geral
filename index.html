@@ -73,9 +73,6 @@
                 { head: 'Campeão', cl: 'num', html: ƒ('winner', percent())}
             ];
 
-            
-
-            var sortAscending = true;
             var keys = [
                 { head: 'flag', cl: 'center', html: ƒ('flagA')},
                 { head: 'team', cl: 'center', html: ƒ('team')},
@@ -99,7 +96,22 @@
                 .data(headers).enter()
                 .append('th')
                 .attr('class', ƒ('cl'))
-                .text(ƒ('head'));
+                .text(ƒ('head'))
+ 		                   .on('click', function (d) {
+		                	   headers.attr('class', 'header');
+		                	   
+		                	   if (sortAscending) {
+		                	     rows.sort(function(a, b) { return b[d] < a[d]; });
+		                	     sortAscending = false;
+		                	     this.className = 'aes';
+		                	   } else {
+		                		 rows.sort(function(a, b) { return b[d] > a[d]; });
+		                		 sortAscending = true;
+		                		 this.className = 'des';
+		                	   }
+		                	   
+		                   });       
+        
 
 
             // Corpo da tabela
