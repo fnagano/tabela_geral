@@ -17,7 +17,8 @@
     border-collapse: collapse;
 }
     th {
-    cursor: s-resize;
+    background-color: #004481;
+    color: white;
     padding-top: 6px;
     padding-bottom: 6px;
 }   
@@ -49,15 +50,7 @@
     table th:nth-child(8){
        width: 70px;
      }
-	th.des:after {
-    background-color: #004481;
-    color: white;
-    }
-    
-    th.aes:after {
-    background-color: #004481;
-    color: white;
-    }
+
 	    
     </style>
 </head>
@@ -93,8 +86,6 @@
                 { head: 'winner', cl: 'num', html: ƒ('winner', percent())}
             ];
 
-            var sortAscending = true;
-
             // Criando tabela
             var table = d3.select('body')
                 .append('table');
@@ -105,24 +96,8 @@
                 .data(headers).enter()
                 .append('th')
                 .attr('class', ƒ('cl'))
-                .text(ƒ('head'))
- 		                   .on('click', function (d) {
-		                	   headers.attr('class', 'head');
-		                	   
-		                	   if (sortAscending) {
-		                	     rows.sort(function(a, b) { return b[d] < a[d]; });
-		                	     sortAscending = false;
-		                	     this.className = 'aes';
-		                	   } else {
-		                		 rows.sort(function(a, b) { return b[d] > a[d]; });
-		                		 sortAscending = true;
-		                		 this.className = 'des';
-		                	   }
-		                	   
-		                   });       
+                .text(ƒ('head'));    
         
-
-
             // Corpo da tabela
             table.append('tbody')
             .selectAll('tr')
