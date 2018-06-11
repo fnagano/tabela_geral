@@ -100,14 +100,14 @@
                 .append('table');
        
             // Criando cabecalho
-            var headers = table.append('thead').append('tr')
+            table.append('thead').append('tr')
                 .selectAll('th')
                 .data(headers).enter()
                 .append('th')
                 .attr('class', ƒ('cl'))
                 .text(ƒ('head'))
  		                   .on('click', function (d) {
-		                	   headers.attr('class', 'header');
+		                	   headers.attr('class', 'head');
 		                	   
 		                	   if (sortAscending) {
 		                	     rows.sort(function(a, b) { return b[d] < a[d]; });
